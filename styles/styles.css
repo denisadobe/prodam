@@ -353,6 +353,14 @@ main .section.centered > div {
   text-align: center;
 }
 
+/* section with an authored background image */
+main .section.has-background {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+}
+
 main .section.centered h1 {
   font-size: var(--heading-font-size-m);
   max-width: 900px;

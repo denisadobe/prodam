@@ -31,6 +31,11 @@ function decorateSectionMetadata(main) {
           .map((s) => s.trim().toLowerCase().replace(/\s+/g, '-'))
           .filter((s) => s);
         styles.forEach((s) => section.classList.add(s));
+      } else if (key === 'background') {
+        // Apply an authored background image to the section.
+        const url = (meta.background.match(/https?:\/\/[^\s)"']+/) || [meta.background])[0];
+        section.style.backgroundImage = `url("${url}")`;
+        section.classList.add('has-background');
       } else {
         section.dataset[key.replace(/-([a-z])/g, (_, c) => c.toUpperCase())] = meta[key];
       }

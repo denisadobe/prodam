@@ -33,8 +33,35 @@
 }
 
 /* ---- solution variant (featured "Soluções Prodam") ---- */
+
+/* Section carries the illustration as a background on the right; a light
+   left-to-right gradient keeps the text column legible. */
+main .section.has-background:has(.columns.solution) {
+  position: relative;
+  background-size: cover;
+  background-position: right center;
+}
+
+main .section.has-background:has(.columns.solution)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #eef1f5 0%, rgb(238 241 245 / 92%) 42%, rgb(238 241 245 / 55%) 62%, rgb(238 241 245 / 0%) 85%);
+}
+
+main .section.has-background:has(.columns.solution) > div {
+  position: relative;
+  z-index: 1;
+}
+
 .columns.solution {
-  padding: 8px 0;
+  padding: 32px 0;
+}
+
+/* keep the text to the left half so the background photo shows on the right */
+/* stylelint-disable-next-line no-descending-specificity */
+.columns.solution > div {
+  max-width: 46%;
 }
 
 /* overline: small grey label above the title */
@@ -81,17 +108,13 @@
   font-weight: 500;
 }
 
-.columns.solution .columns-img-col img {
-  border-radius: 8px;
-}
-
-@media (width >= 900px) {
-  /* text left, image right; give the text a touch more room */
-  .columns.solution > div > div:first-child {
-    flex: 1.1;
+/* mobile: text spans full width; background fades across the whole section */
+@media (width < 900px) {
+  .columns.solution > div {
+    max-width: 100%;
   }
 
-  .columns.solution > div > .columns-img-col {
-    flex: 0.9;
+  main .section.has-background:has(.columns.solution)::before {
+    background: rgb(238 241 245 / 88%);
   }
 }

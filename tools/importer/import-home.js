@@ -103,6 +103,7 @@ const PAGE_TEMPLATE = {
       name: 'Solucoes Prodam featured solution',
       selector: ['#main-content > div.prodam-content-wrapper > div.lfr-layout-structure-item-e3778100-38db-c106-1f66-5dae4215d9a5'],
       style: 'light',
+      background: 'https://portal.prodam.sp.gov.br/documents/20118/225864/Atendimento-ao-cidadao.jpg/108c1974-3625-5de9-e05b-9561f924bb3c?t=1700673978776',
     },
     {
       id: 'rc1c2c8',
@@ -121,6 +122,7 @@ const PAGE_TEMPLATE = {
       name: 'Cases logo carousel',
       selector: ['div.lfr-layout-structure-item-b0f2d400-2858-9039-1201-93586ad7c6ce', '#uhht'],
       style: 'light',
+      background: 'https://portal.prodam.sp.gov.br/o/adaptive-media/image/126097/banner_large/bannerConctando.png?t=1700143953127',
     },
     {
       id: 'rc1c2c11',
