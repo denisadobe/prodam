@@ -120,7 +120,7 @@ const PAGE_TEMPLATE = {
       id: 'rc1c2c10',
       name: 'Cases logo carousel',
       selector: ['div.lfr-layout-structure-item-b0f2d400-2858-9039-1201-93586ad7c6ce', '#uhht'],
-      style: null,
+      style: 'light',
     },
     {
       id: 'rc1c2c11',

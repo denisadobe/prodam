@@ -3,8 +3,10 @@
 /**
  * Parser for carousel-logos (case / recognition logo strip).
  * Base: carousel. Source: https://portal.prodam.sp.gov.br/
- * 2 columns. Each logo tile -> one row: [linked image | caption/name text].
- * The logo image keeps its link href; caption falls back to the image alt.
+ * 1 column. Each logo tile -> one row: [linked logo image].
+ * No visible caption — the source shows only the logo (the name lives in a
+ * screen-reader-only span), so the name is preserved on the image `alt`/link
+ * title for accessibility, not rendered as a visible label.
  */
 export default function parse(element, { document }) {
   const slides = Array.from(element.querySelectorAll('.swiper-slide'));
@@ -17,31 +19,24 @@ export default function parse(element, { document }) {
 
     const link = slide.querySelector('a[href]');
 
-    // Keep the link wrapping the logo image.
+    // Ensure the logo name survives as the image alt (source keeps it sr-only).
+    if (!img.getAttribute('alt')) {
+      const srName = slide.querySelector('.sr-only, [class*="title"], [class*="name"]');
+      if (srName) img.setAttribute('alt', srName.textContent.replace(/\s+/g, ' ').trim());
+    }
+
+    // Keep the link wrapping the logo image; carry the name as the link title.
     let imageContent = img;
     if (link) {
       const a = document.createElement('a');
       a.setAttribute('href', link.getAttribute('href'));
+      if (img.getAttribute('alt')) a.setAttribute('title', img.getAttribute('alt'));
       a.append(img);
       imageContent = a;
     }
 
-    // Caption: explicit caption text if present, else the image alt.
-    const captionEl = slide.querySelector('figcaption, [class*="caption"], [class*="title"], [class*="name"]');
-    let captionText = captionEl ? captionEl.textContent.replace(/\s+/g, ' ').trim() : '';
-    if (!captionText && img.getAttribute('alt')) {
-      captionText = img.getAttribute('alt').trim();
-    }
-
-    const captionCell = [];
-    if (captionText) {
-      const p = document.createElement('p');
-      p.textContent = captionText;
-      captionCell.push(p);
-    }
-
-    // Row: image cell + caption cell (2-column carousel).
-    cells.push([imageContent, captionCell]);
+    // Row: single cell with the linked logo (no visible caption).
+    cells.push([imageContent]);
   });
 
   if (cells.length === 0) {

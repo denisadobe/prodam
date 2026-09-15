@@ -12,3 +12,7 @@ helix-importer-ui
 !CLAUDE.md
 !AGENTS.md
 migration-work/footer-validation/
+
+# generated import artifacts
+tools/importer/reports/
+tools/importer/*.bundle.js
