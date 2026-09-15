@@ -1,0 +1,162 @@
+{
+  "metadata": {
+    "projectType": "da"
+  },
+  "templates": [
+    {
+      "name": "home",
+      "urls": [
+        "https://portal.prodam.sp.gov.br/"
+      ],
+      "representativeUrl": "https://portal.prodam.sp.gov.br/",
+      "urlPattern": "/",
+      "description": "Prodam homepage: hero carousel, intro, promo banners, news cards, featured solution, infrastructure metrics, and case/recognition logo carousels.",
+      "blocks": [
+        {
+          "name": "carousel",
+          "section": "hero",
+          "instances": [
+            "#main-content > div.prodam-content-wrapper > div.lfr-layout-structure-item-85d01537-1edb-8f00-8618-0e62d30dff01"
+          ]
+        },
+        {
+          "name": "hero",
+          "instances": [
+            "#fmvm",
+            "#main-content > div.prodam-content-wrapper > div.lfr-layout-structure-item-3856fe77-db28-d7df-2a15-3f834543be3d"
+          ]
+        },
+        {
+          "name": "cards",
+          "section": "news",
+          "instances": [
+            "#main-content > div.prodam-content-wrapper > div.lfr-layout-structure-item-6ea6111e-9778-303a-636b-2ede4697f3df"
+          ]
+        },
+        {
+          "name": "columns",
+          "instances": [
+            "#main-content > div.prodam-content-wrapper > div.lfr-layout-structure-item-e3778100-38db-c106-1f66-5dae4215d9a5"
+          ]
+        },
+        {
+          "name": "metrics",
+          "instances": [
+            "#main-content > div.prodam-content-wrapper > div.lfr-layout-structure-item-69e49c8e-35de-d479-5a9e-1d3ccdb870f1"
+          ]
+        },
+        {
+          "name": "carousel-logos",
+          "section": "logos",
+          "instances": [
+            "#uhht",
+            "#main-content > div.prodam-content-wrapper > div.lfr-layout-structure-item-0df630be-f196-1254-9d3c-f57f54f8a8bd"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "rc1c2c1",
+          "name": "Hero image carousel",
+          "selector": [
+            "#main-content > div.prodam-content-wrapper > div.lfr-layout-structure-item-85d01537-1edb-8f00-8618-0e62d30dff01"
+          ],
+          "style": null,
+          "blocks": ["carousel"],
+          "defaultContent": []
+        },
+        {
+          "id": "rc1c2c2",
+          "name": "Intro - Ola, eu sou a Prodam",
+          "selector": [
+            "#main-content > div.prodam-content-wrapper > div.lfr-layout-structure-item-4189807c-b023-6b18-772e-5022ba28c498"
+          ],
+          "style": "centered",
+          "blocks": [],
+          "defaultContent": [
+            "#main-content > div.prodam-content-wrapper > div.lfr-layout-structure-item-4189807c-b023-6b18-772e-5022ba28c498 h1",
+            "#main-content > div.prodam-content-wrapper > div.lfr-layout-structure-item-4189807c-b023-6b18-772e-5022ba28c498 p"
+          ]
+        },
+        {
+          "id": "rc1c2c3",
+          "name": "Prodam Store promo banner",
+          "selector": [
+            "div.lfr-layout-structure-item-494206e1-b609-35e6-b79d-5ec15c472fc6",
+            "#fmvm"
+          ],
+          "style": null,
+          "blocks": ["hero"],
+          "defaultContent": []
+        },
+        {
+          "id": "rc1c2c5",
+          "name": "Noticias news cards",
+          "selector": [
+            "#main-content > div.prodam-content-wrapper > div.lfr-layout-structure-item-6ea6111e-9778-303a-636b-2ede4697f3df"
+          ],
+          "style": null,
+          "blocks": ["cards"],
+          "defaultContent": [
+            "#main-content > div.prodam-content-wrapper > div.lfr-layout-structure-item-6ea6111e-9778-303a-636b-2ede4697f3df h2"
+          ]
+        },
+        {
+          "id": "rc1c2c7",
+          "name": "Solucoes Prodam featured solution",
+          "selector": [
+            "#main-content > div.prodam-content-wrapper > div.lfr-layout-structure-item-e3778100-38db-c106-1f66-5dae4215d9a5"
+          ],
+          "style": "light",
+          "blocks": ["columns"],
+          "defaultContent": []
+        },
+        {
+          "id": "rc1c2c8",
+          "name": "Infraestrutura Prodam metrics",
+          "selector": [
+            "#main-content > div.prodam-content-wrapper > div.lfr-layout-structure-item-69e49c8e-35de-d479-5a9e-1d3ccdb870f1"
+          ],
+          "style": "navy",
+          "blocks": ["metrics"],
+          "defaultContent": [
+            "#main-content > div.prodam-content-wrapper > div.lfr-layout-structure-item-69e49c8e-35de-d479-5a9e-1d3ccdb870f1 h2"
+          ]
+        },
+        {
+          "id": "rc1c2c9",
+          "name": "Smart-city / ISO recognition banner",
+          "selector": [
+            "#main-content > div.prodam-content-wrapper > div.lfr-layout-structure-item-3856fe77-db28-d7df-2a15-3f834543be3d"
+          ],
+          "style": null,
+          "blocks": ["hero"],
+          "defaultContent": []
+        },
+        {
+          "id": "rc1c2c10",
+          "name": "Cases logo carousel",
+          "selector": [
+            "div.lfr-layout-structure-item-b0f2d400-2858-9039-1201-93586ad7c6ce",
+            "#uhht"
+          ],
+          "style": "light",
+          "blocks": ["carousel-logos"],
+          "defaultContent": ["#uhht h2"]
+        },
+        {
+          "id": "rc1c2c11",
+          "name": "Reconhecimentos logo carousel",
+          "selector": [
+            "#main-content > div.prodam-content-wrapper > div.lfr-layout-structure-item-0df630be-f196-1254-9d3c-f57f54f8a8bd"
+          ],
+          "style": "navy",
+          "blocks": ["carousel-logos"],
+          "defaultContent": [
+            "#main-content > div.prodam-content-wrapper > div.lfr-layout-structure-item-0df630be-f196-1254-9d3c-f57f54f8a8bd h2"
+          ]
+        }
+      ]
+    }
+  ]
+}

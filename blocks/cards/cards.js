@@ -13,5 +13,23 @@ export default function decorate(block) {
     ul.append(li);
   });
   ul.querySelectorAll('picture > img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
+
+  // News variant: tag the excerpt and the "read more" link for styling.
+  if (block.classList.contains('news')) {
+    ul.querySelectorAll('.cards-card-body').forEach((body) => {
+      const paras = [...body.querySelectorAll(':scope > p')];
+      // last standalone link paragraph becomes the read-more affordance
+      const last = paras[paras.length - 1];
+      const lastLink = last?.querySelector('a');
+      if (lastLink && last.textContent.trim() === lastLink.textContent.trim()) {
+        lastLink.classList.add('readmore');
+      }
+      // the longest text paragraph is treated as the excerpt
+      const textParas = paras.filter((p) => !p.querySelector('a') && p.textContent.trim());
+      const excerpt = textParas.sort((a, b) => b.textContent.length - a.textContent.length)[0];
+      if (excerpt) excerpt.classList.add('cards-excerpt');
+    });
+  }
+
   block.replaceChildren(ul);
 }

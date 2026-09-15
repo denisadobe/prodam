@@ -11,17 +11,25 @@
  */
 
 :root {
+  /* brand palette (Prodam) */
+  --prodam-blue: #264fae;
+  --prodam-blue-dark: #003087;
+  --prodam-navy: #11116c;
+  --prodam-teal: #002b48;
+  --prodam-orange: #ff671d;
+  --prodam-orange-dark: #e05e0c;
+
   /* colors */
   --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  --light-color: #f9f9f9;
+  --dark-color: #495057;
+  --text-color: #212529;
+  --link-color: var(--prodam-blue);
+  --link-hover-color: var(--prodam-blue-dark);
 
   /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --body-font-family: 'open sans', roboto, roboto-fallback, sans-serif;
+  --heading-font-family: montserrat, roboto-condensed, roboto-condensed-fallback, sans-serif;
 
   /* body sizes */
   --body-font-size-m: 22px;
@@ -107,7 +115,7 @@ h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.25;
   scroll-margin: 40px;
 }
@@ -254,8 +262,8 @@ button.button.secondary:disabled:focus-visible {
 /* high-impact call-to-action */
 a.button.accent,
 button.button.accent {
-  border-color: var(--link-color);
-  background-color: var(--link-color);
+  border-color: var(--prodam-orange);
+  background-color: var(--prodam-orange);
   color: var(--background-color);
 }
 
@@ -263,8 +271,9 @@ a.button.accent:hover,
 a.button.accent:focus-visible,
 button.button.accent:hover,
 button.button.accent:focus-visible {
-  border-color: var(--link-hover-color);
-  background-color: var(--link-hover-color);
+  border-color: var(--prodam-orange-dark);
+  background-color: var(--prodam-orange-dark);
+  color: var(--background-color);
 }
 
 a.button.accent[aria-disabled="true"],
@@ -322,4 +331,42 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
+}
+
+/* dark navy band (e.g. infrastructure metrics) */
+main .section.navy {
+  background-color: var(--prodam-navy);
+  color: #fff;
+  margin: 0;
+  padding: 56px 0;
+}
+
+main .section.navy h1,
+main .section.navy h2,
+main .section.navy h3 {
+  color: #fff;
+}
+
+/* centered intro block */
+main .section.centered > div {
+  text-align: center;
+}
+
+main .section.centered h1 {
+  font-size: var(--heading-font-size-m);
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*
+ * Section titles: a section's leading heading (Notícias, Infraestrutura, Cases,
+ * Reconhecimentos) is centered and uppercase, mirroring the reference.
+ */
+main .section > .default-content-wrapper > h2 {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: var(--heading-font-size-s);
+  letter-spacing: 0.02em;
+  margin-bottom: 24px;
 }
