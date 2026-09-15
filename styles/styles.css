@@ -379,3 +379,14 @@ main .section > .default-content-wrapper > h2 {
   letter-spacing: 0.02em;
   margin-bottom: 24px;
 }
+
+/*
+ * Library block docs carry a `library-metadata` table (name/description) so the
+ * DA Library can label each block. This project's slim aem.js doesn't strip it,
+ * so it would otherwise render as raw text under the block preview. Hide it
+ * (and its section wrapper) so the Library shows only the rendered block.
+ */
+.library-metadata,
+.library-metadata-wrapper {
+  display: none !important;
+}
