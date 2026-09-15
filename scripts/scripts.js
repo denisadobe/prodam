@@ -20,7 +20,15 @@ import {
  * parent section wrapper, and remove the block before sections are decorated.
  * @param {Element} main The main container element
  */
+function applySectionBackground(section, value) {
+  if (!value) return;
+  const url = (value.match(/https?:\/\/[^\s)"']+/) || [value])[0];
+  section.style.backgroundImage = `url("${url}")`;
+  section.classList.add('has-background');
+}
+
 function decorateSectionMetadata(main) {
+  // Path A: our own (localhost) — the `.section-metadata` block is still present.
   main.querySelectorAll(':scope > div > div.section-metadata').forEach((metaBlock) => {
     const section = metaBlock.parentElement;
     const meta = readBlockConfig(metaBlock);
@@ -32,15 +40,18 @@ function decorateSectionMetadata(main) {
           .filter((s) => s);
         styles.forEach((s) => section.classList.add(s));
       } else if (key === 'background') {
-        // Apply an authored background image to the section.
-        const url = (meta.background.match(/https?:\/\/[^\s)"']+/) || [meta.background])[0];
-        section.style.backgroundImage = `url("${url}")`;
-        section.classList.add('has-background');
+        applySectionBackground(section, meta.background);
       } else {
         section.dataset[key.replace(/-([a-z])/g, (_, c) => c.toUpperCase())] = meta[key];
       }
     });
     metaBlock.remove();
+  });
+
+  // Path B: production — EDS already consumed section-metadata, leaving the
+  // background on the section's `data-background` attribute.
+  main.querySelectorAll(':scope > div[data-background]').forEach((section) => {
+    applySectionBackground(section, section.dataset.background);
   });
 }
 
