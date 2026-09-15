@@ -47,12 +47,8 @@ function decorateSectionMetadata(main) {
     });
     metaBlock.remove();
   });
-
-  // Path B: production — EDS already consumed section-metadata, leaving the
-  // background on the section's `data-background` attribute.
-  main.querySelectorAll(':scope > div[data-background]').forEach((section) => {
-    applySectionBackground(section, section.dataset.background);
-  });
+  // Production Path B (data-background on the section) is applied in
+  // decorateMain after decorateSections, since EDS sets it there.
 }
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -195,6 +191,11 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSectionMetadata(main);
   decorateSections(main);
+  // In production EDS adds `data-background` on the section during
+  // decorateSections, so apply those backgrounds after sections are built.
+  main.querySelectorAll(':scope > div[data-background]').forEach((section) => {
+    applySectionBackground(section, section.dataset.background);
+  });
   decorateBlocks(main);
   decorateButtons(main);
 }
