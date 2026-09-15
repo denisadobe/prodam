@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Abrir no Universal Editor</title>
+  <style>
+    :root { color-scheme: light; }
+    body {
+      margin: 0;
+      font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: #1f2733;
+      background: #fff;
+      padding: 20px;
+    }
+    .wrap { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+    p { margin: 0; font-size: 14px; line-height: 1.5; }
+    .muted { color: #6b7280; font-size: 12px; word-break: break-all; }
+    a.btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #ff671d; color: #fff; text-decoration: none;
+      font-weight: 600; font-size: 14px;
+      padding: 10px 18px; border-radius: 6px;
+    }
+    a.btn:hover { background: #e35a13; }
+    .err { color: #b42318; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p id="status">Preparando o link do Universal Editor…</p>
+    <a id="open" class="btn" target="_blank" rel="noopener" hidden>Abrir no Universal Editor ↗</a>
+    <p id="url" class="muted"></p>
+  </div>
+  <script type="module">
+    import DA_SDK from 'https://da.live/nx/utils/sdk.js';
+
+    // UE-over-da.live proxy host for this project.
+    const UE_HOST = 'main--prodam--denisadobe.ue.da.live';
+    const UE_BASE = `https://experience.adobe.com/#/aem/editor/canvas/${UE_HOST}`;
+
+    const statusEl = document.getElementById('status');
+    const linkEl = document.getElementById('open');
+    const urlEl = document.getElementById('url');
+
+    try {
+      const sdk = await DA_SDK;
+      // The SDK resolves with the parent context. Different DA/EW builds expose
+      // it either at the top level or under `context`; read defensively.
+      const ctx = sdk.context || sdk;
+      const path = ctx.path || sdk.path || '';
+      // DA paths have no extension; strip a trailing .html just in case and
+      // map the site root to /index (EDS convention).
+      let clean = String(path).replace(/\.html?$/, '');
+      if (clean === '' || clean === '/') clean = '/index';
+      if (!clean.startsWith('/')) clean = `/${clean}`;
+
+      const ueUrl = `${UE_BASE}${clean}`;
+      linkEl.href = ueUrl;
+      linkEl.hidden = false;
+      urlEl.textContent = ueUrl;
+      statusEl.textContent = 'Abra esta página no Universal Editor (novo separador):';
+    } catch (e) {
+      statusEl.classList.add('err');
+      statusEl.textContent = `Não foi possível obter o contexto da página: ${e?.message || e}`;
+    }
+  </script>
+</body>
+</html>
