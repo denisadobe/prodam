@@ -282,36 +282,30 @@ header nav .nav-tools {
    Bottom bar: primary menu (sections) as a full-width blue band.
    ============================================================ */
 @media (width >= 900px) {
+  /* top row = brand (left) + utility links (right); the blue primary-menu
+     band wraps onto its own full-width second row */
   header nav {
-    /* top row = brand + tools; second row = the blue primary menu band */
-    display: grid;
-    grid-template:
-      'brand tools' auto
-      'sections sections' auto / auto 1fr;
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: space-between;
     gap: 0;
     max-width: 1264px;
     height: auto;
-    padding: 0;
-    column-gap: 24px;
-  }
-
-  header nav .nav-brand,
-  header nav .nav-tools {
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding: 12px 0 0;
   }
 
   header nav .nav-brand {
-    padding-left: 32px;
+    order: 1;
+    padding: 0 32px;
   }
 
+  /* utility links: top-right, above the blue bar, small and muted */
   header nav .nav-tools {
-    padding-right: 32px;
-    justify-self: end;
+    order: 2;
+    padding: 0 32px;
   }
 
-  /* utility links (top-right), small and muted */
   header nav .nav-tools ul {
     list-style: none;
     display: flex;
@@ -328,15 +322,16 @@ header nav .nav-tools {
   }
 
   header nav .nav-tools a:hover {
-    color: var(--prodam-blue, #264fae);
+    color: var(--prodam-blue-dark, #143d74);
   }
 
-  /* primary menu: full-width blue band spanning both columns */
+  /* primary menu: full-width blue band on the second row */
   header nav .nav-sections {
-    grid-area: sections;
-    background-color: var(--prodam-blue, #264fae);
-    margin: 0 calc(50% - 50vw);
+    order: 3;
+    flex: 0 0 100%;
+    margin: 12px calc(50% - 50vw) 0;
     padding: 0 max(32px, calc(50vw - 632px));
+    background-color: var(--prodam-menu, #143d74);
   }
 
   /* stylelint-disable-next-line no-descending-specificity */
