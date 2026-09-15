@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Abrir no Universal Editor</title>
+  <title>Open in Universal Editor</title>
   <style>
     :root { color-scheme: light; }
     body {
@@ -28,8 +28,8 @@
 </head>
 <body>
   <div class="wrap">
-    <p id="status">Preparando o link do Universal Editor…</p>
-    <a id="open" class="btn" target="_blank" rel="noopener" hidden>Abrir no Universal Editor ↗</a>
+    <p id="status">Opening this page in the Universal Editor…</p>
+    <a id="open" class="btn" target="_blank" rel="noopener" hidden>Open in Universal Editor ↗</a>
     <p id="url" class="muted"></p>
   </div>
   <script type="module">
@@ -57,12 +57,22 @@
 
       const ueUrl = `${UE_BASE}${clean}`;
       linkEl.href = ueUrl;
-      linkEl.hidden = false;
       urlEl.textContent = ueUrl;
-      statusEl.textContent = 'Abra esta página no Universal Editor (novo separador):';
+
+      // Try to open the editor automatically in a new tab. Browsers may block
+      // this because the SDK resolves asynchronously (the click gesture is
+      // gone by now); if so, fall back to a prominent link.
+      const opened = window.open(ueUrl, '_blank', 'noopener');
+      if (opened) {
+        statusEl.textContent = 'The Universal Editor opened in a new tab. Use the link below if it did not.';
+        linkEl.hidden = false;
+      } else {
+        statusEl.textContent = 'Open this page in the Universal Editor:';
+        linkEl.hidden = false;
+      }
     } catch (e) {
       statusEl.classList.add('err');
-      statusEl.textContent = `Não foi possível obter o contexto da página: ${e?.message || e}`;
+      statusEl.textContent = `Could not read the page context: ${e?.message || e}`;
     }
   </script>
 </body>
