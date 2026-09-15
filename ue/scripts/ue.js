@@ -3,24 +3,29 @@
  * Only loaded on *.ue.da.live hosts. Keeps UE instrumentation (data-aue-*)
  * attached when blocks rewrite their own DOM at decoration time.
  *
- * Piloto: instrumentação do bloco cards (news). Ao ser editado no UE, o
- * cards.js transforma cada <div> de card em <li> e troca a <picture> — este
- * observer move os atributos data-aue-* para os novos nós.
+ * Blocos que reconstroem sua própria lista (cards, carousel, metrics)
+ * transformam cada <div> de linha em <li> e trocam a <picture>. Cada
+ * decorate() já chama moveInstrumentation diretamente; este observer é uma
+ * rede de segurança para re-renders disparados pelo UE após a decoração.
  */
 import { moveInstrumentation } from './ue-utils.js';
 
+// Blocos que convertem linhas <div> em uma <ul>/<li> na decoração.
+const LIST_BLOCKS = ['cards', 'carousel', 'metrics'];
+
 const setupObservers = () => {
-  const mutatingBlocks = document.querySelectorAll('div.cards');
+  const mutatingBlocks = document.querySelectorAll(
+    LIST_BLOCKS.map((name) => `div.${name}`).join(','),
+  );
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       if (mutation.type !== 'childList' || mutation.target.tagName !== 'DIV') return;
 
-      const type = mutation.target.classList.contains('cards-card-image')
-        ? 'cards-image'
-        : mutation.target.attributes['data-aue-component']?.value;
+      const component = mutation.target.attributes['data-aue-component']?.value;
+      const isListBlock = LIST_BLOCKS.includes(component);
 
-      if (type === 'cards') {
-        // card <div> rows replaced by a single <ul> of <li> cards
+      if (isListBlock) {
+        // block's <div> rows replaced by a single <ul> of <li> items
         const added = mutation.addedNodes;
         if (added.length === 1 && added[0].tagName === 'UL') {
           const ul = added[0];
@@ -29,8 +34,8 @@ const setupObservers = () => {
             if (i < ul.children.length) moveInstrumentation(div, ul.children[i]);
           });
         }
-      } else if (type === 'cards-image' && mutation.target.classList.contains('cards-card-image')) {
-        // optimized <picture> swap inside a card image cell
+      } else {
+        // optimized <picture> swap inside an image cell
         const addedPic = [...mutation.addedNodes].filter((n) => n.tagName === 'PICTURE');
         const removedPic = [...mutation.removedNodes].filter((n) => n.tagName === 'PICTURE');
         if (addedPic.length === 1 && removedPic.length === 1) {

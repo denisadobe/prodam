@@ -31,6 +31,92 @@
               ]
             }
           }
+        },
+        {
+          "title": "Carousel",
+          "id": "carousel",
+          "model": "carousel",
+          "filter": "carousel",
+          "plugins": {
+            "da": {
+              "rows": 1,
+              "columns": 2
+            }
+          }
+        },
+        {
+          "title": "Slide",
+          "id": "carousel-slide",
+          "model": "carousel-slide",
+          "plugins": {
+            "da": {
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                { "name": "image", "selector": "div:nth-child(1)>picture>img[src]" },
+                { "name": "imageAlt", "selector": "div:nth-child(1)>picture>img[alt]" },
+                { "name": "text", "selector": "div:nth-child(2)" }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Metrics",
+          "id": "metrics",
+          "model": "metrics",
+          "filter": "metrics",
+          "plugins": {
+            "da": {
+              "rows": 1,
+              "columns": 2
+            }
+          }
+        },
+        {
+          "title": "Métrica",
+          "id": "metric",
+          "model": "metric",
+          "plugins": {
+            "da": {
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                { "name": "image", "selector": "div:nth-child(1)>picture>img[src]" },
+                { "name": "imageAlt", "selector": "div:nth-child(1)>picture>img[alt]" },
+                { "name": "text", "selector": "div:nth-child(2)" }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Columns (solution)",
+          "id": "columns",
+          "model": "columns",
+          "plugins": {
+            "da": {
+              "rows": 1,
+              "columns": 1,
+              "fields": [
+                { "name": "text", "selector": "div:nth-child(1)" }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Hero",
+          "id": "hero",
+          "model": "hero",
+          "plugins": {
+            "da": {
+              "rows": 1,
+              "columns": 1,
+              "fields": [
+                { "name": "image", "selector": "picture>img[src]" },
+                { "name": "imageAlt", "selector": "picture>img[alt]" },
+                { "name": "link", "selector": "a[href]" }
+              ]
+            }
+          }
         }
       ]
     }

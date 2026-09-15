@@ -1,4 +1,5 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
+import { moveInstrumentation } from '../../ue/scripts/ue-utils.js';
 
 /**
  * Concentric-ring SVG shown behind each metric value, echoing the reference's
@@ -24,6 +25,7 @@ export default function decorate(block) {
 
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
+    moveInstrumentation(row, li); // keep UE instrumentation on the metric item
     li.className = 'metrics-item';
 
     [...row.children].forEach((cell) => {
@@ -68,9 +70,11 @@ export default function decorate(block) {
     ul.append(li);
   });
 
-  ul.querySelectorAll('picture > img').forEach((img) => img
-    .closest('picture')
-    .replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '150' }])));
+  ul.querySelectorAll('picture > img').forEach((img) => {
+    const optimized = createOptimizedPicture(img.src, img.alt, false, [{ width: '150' }]);
+    moveInstrumentation(img, optimized.querySelector('img'));
+    img.closest('picture').replaceWith(optimized);
+  });
 
   block.replaceChildren(ul);
 }

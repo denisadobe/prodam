@@ -10,13 +10,29 @@
     "components": [
       "text",
       "image",
-      "cards"
+      "cards",
+      "carousel",
+      "columns",
+      "metrics",
+      "hero"
     ]
   },
   {
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id": "carousel",
+    "components": [
+      "carousel-slide"
+    ]
+  },
+  {
+    "id": "metrics",
+    "components": [
+      "metric"
     ]
   }
 ]

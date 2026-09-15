@@ -1,5 +1,7 @@
 // Adapted from the AEM Block Collection carousel.
 // Labels are inlined (no placeholders.js dependency in this project).
+import { moveInstrumentation } from '../../ue/scripts/ue-utils.js';
+
 const LABELS = {
   carousel: 'Carousel',
   slideControls: 'Carousel Slide Controls',
@@ -84,6 +86,7 @@ function bindEvents(block) {
 
 function createSlide(row, slideIndex, carouselId) {
   const slide = document.createElement('li');
+  moveInstrumentation(row, slide); // keep UE instrumentation on the slide
   slide.dataset.slideIndex = slideIndex;
   slide.setAttribute('id', `carousel-${carouselId}-slide-${slideIndex}`);
   slide.classList.add('carousel-slide');
