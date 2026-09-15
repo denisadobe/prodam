@@ -31,3 +31,67 @@
     order: unset;
   }
 }
+
+/* ---- solution variant (featured "Soluções Prodam") ---- */
+.columns.solution {
+  padding: 8px 0;
+}
+
+/* overline: small grey label above the title */
+.columns.solution h2 {
+  font-size: var(--body-font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #a1a1a1;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.columns.solution h3 {
+  font-size: var(--heading-font-size-l);
+  color: var(--prodam-blue-dark, #003087);
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+
+.columns.solution p {
+  color: var(--dark-color);
+  margin: 0 0 16px;
+}
+
+/* "Saiba Mais" as an outlined orange button */
+.columns.solution .button.primary {
+  border: 2px solid var(--prodam-orange);
+  background: transparent;
+  color: var(--prodam-orange);
+  border-radius: 4px;
+  padding: 0.5em 1.6em;
+  font-weight: 600;
+}
+
+.columns.solution .button.primary:hover {
+  background: var(--prodam-orange);
+  color: #fff;
+}
+
+/* secondary "Conheça todas as soluções" link */
+.columns.solution .button-wrapper + p a,
+.columns.solution p:last-child a {
+  color: var(--prodam-blue);
+  font-weight: 500;
+}
+
+.columns.solution .columns-img-col img {
+  border-radius: 8px;
+}
+
+@media (width >= 900px) {
+  /* text left, image right; give the text a touch more room */
+  .columns.solution > div > div:first-child {
+    flex: 1.1;
+  }
+
+  .columns.solution > div > .columns-img-col {
+    flex: 0.9;
+  }
+}

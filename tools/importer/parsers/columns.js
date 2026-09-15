@@ -24,27 +24,38 @@ export default function parse(element, { document }) {
   if (title) textCell.push(title);
   if (description) textCell.push(description);
   if (ctaButton) {
-    // Normalize the button anchor to plain linked text.
+    // Emphasise the CTA so decorateButtons renders it as a button (strong = primary).
     const a = document.createElement('a');
     a.setAttribute('href', ctaButton.getAttribute('href'));
     a.textContent = ctaButton.textContent.replace(/\s+/g, ' ').trim();
+    const strong = document.createElement('strong');
+    strong.append(a);
     const p = document.createElement('p');
-    p.append(a);
+    p.append(strong);
     textCell.push(p);
   }
   if (linkPara) textCell.push(linkPara);
 
   const imageCell = [];
-  if (img) imageCell.push(img);
+  if (img) {
+    imageCell.push(img);
+  } else {
+    // Source renders the illustration as a rotating/background image not captured
+    // on scrape — use the representative "arte4" solutions illustration.
+    const fallback = document.createElement('img');
+    fallback.src = 'https://portal.prodam.sp.gov.br/documents/20118/200075/arte4.png/fd448bcc-6b28-2cc7-9e19-438bfefdea15?t=1700575115254';
+    fallback.alt = 'Soluções Prodam';
+    imageCell.push(fallback);
+  }
 
   if (textCell.length === 0 && imageCell.length === 0) {
     element.replaceWith(...element.childNodes);
     return;
   }
 
-  // One row, two columns: [text | image]
+  // One row, two columns: [text | image] — "solution" variant for richer styling.
   const cells = [[textCell, imageCell]];
 
-  const block = WebImporter.Blocks.createBlock(document, { name: 'columns', cells });
+  const block = WebImporter.Blocks.createBlock(document, { name: 'Columns (solution)', cells });
   element.replaceWith(block);
 }

@@ -83,13 +83,29 @@ export default function parse(element, { document }) {
   // Use the cards "news" variant (EDS class: cards news).
   const block = WebImporter.Blocks.createBlock(document, { name: 'Cards (news)', cells });
 
-  // Preserve the section heading (e.g. "Notícias") as default content above the block.
+  // Preserve the section heading (e.g. "Notícias") above the block, and the
+  // "ver mais notícias" CTA link below it (as an emphasised button).
   const heading = element.querySelector('h1, h2');
+  const before = [];
   if (heading) {
     const h2 = document.createElement('h2');
     h2.textContent = heading.textContent.replace(/\s+/g, ' ').trim();
-    element.replaceWith(h2, block);
-  } else {
-    element.replaceWith(block);
+    before.push(h2);
   }
+
+  const after = [];
+  const ctaLink = [...element.querySelectorAll('a[href]')]
+    .find((a) => /ver mais|todas as not/i.test(a.textContent));
+  if (ctaLink) {
+    const p = document.createElement('p');
+    const strong = document.createElement('strong');
+    const a = document.createElement('a');
+    a.setAttribute('href', ctaLink.getAttribute('href'));
+    a.textContent = ctaLink.textContent.replace(/\s+/g, ' ').trim();
+    strong.append(a);
+    p.append(strong);
+    after.push(p);
+  }
+
+  element.replaceWith(...before, block, ...after);
 }
