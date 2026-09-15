@@ -149,8 +149,13 @@ header .nav-brand {
 }
 
 header nav .nav-brand img {
-  width: 128px;
-  height: auto;
+  width: auto;
+  height: 40px;
+}
+
+/* Prodam: primary nav links pick up the brand blue on hover */
+header nav .nav-sections a:hover {
+  color: var(--prodam-blue, #264fae);
 }
 
 /* sections */

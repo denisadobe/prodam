@@ -1,0 +1,11 @@
+{
+  "type": "da",
+  "sites": {
+    "prodam": {
+      "previewOrg": "denisadobe",
+      "previewSite": "prodam",
+      "contentHostUrl": "https://content.da.live/denisadobe/prodam/",
+      "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json"
+    }
+  }
+}
